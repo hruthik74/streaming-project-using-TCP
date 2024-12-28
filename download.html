@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Download Video{% endblock %}
+
+{% block content %}
+<h2 class="text-center">Downloading: {{ filename }}</h2>
+<div class="progress mt-4">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%;" id="progressBar">0%</div>
+</div>
+<div class="text-center mt-4">
+    <p id="statusMessage">Downloading...</p>
+    <a id="downloadLink" href="{{ url_for('download', filename=filename) }}" class="btn btn-primary d-none">Click here if download doesn’t start</a>
+    <button id="backButton" class="btn btn-secondary d-none" onclick="location.href='/'">Back to Videos</button>
+</div>
+
+<script>
+    const progressBar = document.getElementById('progressBar');
+    const statusMessage = document.getElementById('statusMessage');
+    const downloadLink = document.getElementById('downloadLink');
+    const backButton = document.getElementById('backButton');
+
+    // Simulate download progress
+    let progress = 0;
+    const interval = setInterval(() => {
+        progress += 10;
+        progressBar.style.width = `${progress}%`;
+        progressBar.textContent = `${progress}%`;
+        if (progress >= 100) {
+            clearInterval(interval);
+            statusMessage.textContent = "Download Complete!";
+            downloadLink.classList.remove('d-none');
+            backButton.classList.remove('d-none');
+        }
+    }, 500);
+
+    // Automatically trigger download
+    window.location.href = "{{ url_for('download', filename=filename) }}";
+</script>
+{% endblock %}

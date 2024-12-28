@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #8B0000, #000000);
+            font-family: Arial, sans-serif;
+        }
+    </style>
+
+    <div class="d-flex justify-content-center align-items-center" style="height: 80vh;">
+        <div class="card p-4 shadow-lg" style="max-width: 400px; width: 100%; background-color: #1C1C1C; border-radius: 10px; color: #ffffff;">
+            <h2 class="text-center mb-4" style="color: #ffffff;">Register</h2>
+            <form method="POST" action="/register">
+                <div class="mb-3">
+                    <label for="username" class="form-label" style="color: #ffffff;">Username</label>
+                    <input type="text" name="username" id="username" class="form-control" style="background-color: #333333; color: #ffffff; border: 1px solid #555555;" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label" style="color: #ffffff;">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" style="background-color: #333333; color: #ffffff; border: 1px solid #555555;" required>
+                </div>
+                <button type="submit" class="btn w-100" style="background-color: #8B0000; border: none; color: #ffffff;">Register</button>
+            </form>
+            <p class="mt-3 text-center">
+                Already have an account? <a href="/login" style="color: #8B0000;">Login here</a>.
+            </p>
+        </div>
+    </div>
+{% endblock %}

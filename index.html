@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}MAHV STREAMING {% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #121212; /* Dark background */
+        color: #ffffff; /* Text color for better readability */
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .card {
+        background-color: #1f1f1f; /* Darker card background */
+        border: none;
+        border-radius: 10px;
+        height: 100%; /* Ensures uniform height */
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .card:hover {
+        transform: scale(1.03); /* Slight zoom on hover */
+    }
+
+    .card-img-top {
+        height: 250px; /* Set fixed height for images */
+        object-fit: cover; /* Ensures images are scaled properly */
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .card-title {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #ffffff;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+    }
+
+    .w-48 {
+        width: 48%; /* Buttons take 48% width for equal alignment */
+    }
+</style>
+
+<h2 class="text-center my-5">OUR MOVIE COLLECTION</h2>
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for video, thumbnail in videos %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <img src="{{ url_for('static', filename='thumbnails/' ~ thumbnail) }}" class="card-img-top" alt="{{ video }} Thumbnail">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title text-center mb-3">{{ video }}</h5>
+                    <div class="d-flex justify-content-between mt-auto">
+                        <a href="{{ url_for('watch', filename=video) }}" class="btn btn-primary w-48">Watch</a>
+                        <a href="{{ url_for('download', filename=video) }}" class="btn btn-secondary w-48">Download</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
